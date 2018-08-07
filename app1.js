@@ -1,5 +1,8 @@
 let map
 let infowindow
+let printConsult = ''
+let dataInfoCafe = ''
+let dataInfoRest = ''
 
 function initMap () {
   navigator.geolocation.getCurrentPosition(function (pos) {
@@ -21,12 +24,12 @@ function initMap () {
     // Especificamos la localización, el radio y el tipo de lugares que queremos obtener
     let request = {
       location: myLatlng,
-      radius: 2500,
-      types: ['restaurant']   
+      radius: 1200,
+      types: ['restaurant']
     }
     let request1 = {
       location: myLatlng,
-      radius: 2500,
+      radius: 1200,
       types: ['cafe']
     }
     // Creamos el servicio PlaceService y enviamos la petición.
@@ -34,8 +37,11 @@ function initMap () {
 
     service.nearbySearch(request, function (results, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        for (var i = 0; i < results.length; i++) {
+        for (let i = 0; i < results.length; i++) {
           crearMarcador(results[i])
+          dataInfoRest = results
+          console.log(dataInfoRest)
+          PrintConsult(results[i])
         }
       }
     })
@@ -43,22 +49,62 @@ function initMap () {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
           crearMarcador(results[i])
+          console.log('2' + results[i])
         }
       }
     })
-
   })
 }
 function crearMarcador (place) {
   // Creamos un marcador
-  var marker = new google.maps.Marker({
+  let marker = new google.maps.Marker({
     map: map,
     position: place.geometry.location
   })
 
   // Asignamos el evento click del marcador
   google.maps.event.addListener(marker, 'click', function () {
-    infowindow.setContent(place.name) 
+    infowindow.setContent(place.name)
     infowindow.open(map, this)
   })
+}
+PrintConsult = (results1) => {
+  printConsult += `
+
+<div class="card">
+
+  <div class="card-body">
+    <h5 class="card-title">${results1.name}</h5>
+    <p class="card-text">
+    Puntaje: ${results1.rating}
+    </p>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Mas detalles ...
+</button>
+  </div>
+</div>
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">${results1.name}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      Dirección: ${results1.vicinity},
+      Puntaje: ${results1.rating}
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+    </div>
+  </div>
+</div>`
+  infoRestaurantes.innerHTML = printConsult
 }

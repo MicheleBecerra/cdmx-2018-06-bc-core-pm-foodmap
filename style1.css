@@ -10,4 +10,8 @@ body {
       background-size: 68% ;
       background-position-x: center;
       background-position-y: center;
+      
+  }
+div {
+padding: 10px;
   }
