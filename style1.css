@@ -1,0 +1,13 @@
+body {
+    background-image: url("imagenes/monchies\ maps_-02.png");
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }	
+ #logo {
+      background-color: rgba(248, 164, 8, 0.849);
+      background-image: url("imagenes/monchies\ maps_-09.png");
+      background-size: 68% ;
+      background-position-x: center;
+      background-position-y: center;
+  }
