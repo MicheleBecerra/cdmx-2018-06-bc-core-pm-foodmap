@@ -72,19 +72,20 @@ PrintConsult = (results1) => {
   printConsult += `
 
 <div class="card">
-
+<div class="card-header">
+<h4>${results1.name}</h4>
+  </div>
   <div class="card-body">
-    <h5 class="card-title">${results1.name}</h5>
+    <h5 class="card-title"> Puntaje: </h5>
     <p class="card-text">
-    Puntaje: ${results1.rating}
+     ${results1.rating}
     </p>
+    <!-- Button trigger modal -->  
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  Mas detalles ...
-</button>
+     Mas detalles ...
+    </button>
   </div>
 </div>
-<!-- Button trigger modal -->
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
