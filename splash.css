@@ -1,0 +1,11 @@
+/* {
+    background-color: rgba(248, 144, 8, 0.986);
+    margin: 0;
+    padding: 0;
+  }	*/
+  * {
+    background-image: url("imagenes/monchies maps__Mesa de trabajo 1.png");
+    background-position: 50% 0;
+    background-size: 50%;
+    background-repeat: repeat;
+}
